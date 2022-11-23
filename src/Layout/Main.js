@@ -6,7 +6,9 @@ export default function Main() {
   return (
     <div>
       <Nav />
-      <Outlet />
+      <div className="my-10">
+        <Outlet />
+      </div>
       <Footer />
     </div>
   );
