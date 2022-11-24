@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import img from "../../../../../image/banner.jpg";
 export default function HomeBanner() {
   return (
@@ -9,19 +9,14 @@ export default function HomeBanner() {
           <span className="font-bold text-green-500">...</span>
         </h1>
         <p className="mt-6 text-base font-semibold text-gray-700 sm:text-lg sm:mt-9 lg:mt-12 ">
-          Solo learn community provide you their best to accomplish your desire.
-          Our interactive lesson will boost your programming knowledge to do
-          something better in our carrieer.
+          We are offering a huge range of refurbished second hand laptop. Looks
+          better, works perfectly well, and meet your needs. We work for you not
+          for the sake of our livelihood but for the sake of minds pleasure!
         </p>
         <div className="flex gap-6 mt-10 text-base font-semibold sm:text-lg lg:mt-20">
-          <button
-            to="/courses"
-            className="flex items-center px-2 py-1 text-white duration-300 bg-green-500 rounded-md shadow-sm cursor-pointer sm:px-4 sm:py-2 hover:bg-green-600 active:bg-green-700 transorm transtion active:translate-y-1 focus:ring-2 focus:ring-offset-4 focus:ring-green-600 shadow-green-300 active:shadow-lg backface-hidden"
-          >
-            Buy Now
-          </button>
-          <button className="px-2 py-1 border-4 border-green-500 rounded-md sm:px-4 sm:py-2 ">
-            Read More
+          <button className="btn-primary-main">Buy Now</button>
+          <button className="btn-primary-outline btn-primary-outline-fat">
+            Know More
           </button>
         </div>
       </div>

@@ -4,9 +4,9 @@ import Nav from "../Pages/Shared/Nav";
 
 export default function Main() {
   return (
-    <div>
+    <div className="max-w-[1440px] mx-auto">
       <Nav />
-      <div className="my-10">
+      <div className="my-16">
         <Outlet />
       </div>
       <Footer />

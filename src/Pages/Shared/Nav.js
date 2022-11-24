@@ -1,6 +1,9 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import { useAuth } from "../../Context/AuthContext";
 
 export default function Nav() {
+  const { currentuser } = useAuth();
+
   const navItems = [
     {
       path: "/category/hp",
@@ -11,24 +14,49 @@ export default function Nav() {
       text: "Dell",
     },
     {
-      path: "/category/asus",
-      text: "Asus",
+      path: "/category/lenovo",
+      text: "Lenovo",
     },
   ];
 
   const defaultNav = (
     <>
-      <NavLink to="/">Home</NavLink>
-      <li>
+      <NavLink
+        className={({ isActive }) =>
+          isActive
+            ? "text-white bg-green-400 px-3 py-2 transition duration-300 rounded font-semibold shadow-md shadow-green-300"
+            : "text-black px-3 py-2 transition duration-300 rounded font-semibold"
+        }
+        to="/"
+      >
+        Home
+      </NavLink>
+      <li className="px-3 py-2 bg-white font-semibold">
         Category
-        <ul className="p-2 bg-base-100 ">
+        <ul className=" bg-gray-200 relative z-50">
           {navItems.map((el, i) => (
-            <NavLink className="p-2" key={i} to={el.path}>
+            <NavLink
+              className="px-4 py-2 hover:bg-gray-300 rounded "
+              key={i}
+              to={el.path}
+            >
               {el.text}
             </NavLink>
           ))}
         </ul>
       </li>
+      {!currentuser?.uid && (
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? "text-white bg-green-400 px-3 py-2 transition duration-300 rounded font-semibold shadow-md shadow-green-300"
+              : "text-black px-3 py-2 transition duration-300 rounded font-semibold"
+          }
+          to="/login"
+        >
+          Login
+        </NavLink>
+      )}
     </>
   );
   return (
@@ -58,7 +86,9 @@ export default function Nav() {
             {defaultNav}
           </ul>
         </div>
-        <a className="btn btn-ghost normal-case text-xl">E-Stall</a>
+        <Link to="/" className="btn btn-ghost normal-case">
+          <span className="text-xl">E-Stall</span>
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal p-2 gap-6">{defaultNav}</ul>
