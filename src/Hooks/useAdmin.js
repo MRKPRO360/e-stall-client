@@ -9,7 +9,9 @@ export default function useAdmin(email) {
     if (email) {
       const checkAdmin = async function () {
         try {
-          const res = await fetch(`http://localhost:5000/users/admin`);
+          const res = await fetch(
+            `http://localhost:5000/users/admin?email=${email}`
+          );
 
           const data = await res.json();
 
@@ -25,5 +27,5 @@ export default function useAdmin(email) {
     }
   });
 
-  return [isAdminLoading, isAdmin];
+  return [isAdmin, isAdminLoading];
 }

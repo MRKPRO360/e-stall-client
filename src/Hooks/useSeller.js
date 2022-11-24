@@ -9,7 +9,9 @@ export default function useSeller(email) {
     if (email) {
       const checkSeller = async function () {
         try {
-          const res = await fetch(`http://localhost:5000/users/seller`);
+          const res = await fetch(
+            `http://localhost:5000/users/seller?email=${email}`
+          );
 
           const data = await res.json();
 
@@ -25,5 +27,5 @@ export default function useSeller(email) {
     }
   });
 
-  return [isSellerLoading, isSeller];
+  return [isSeller, isSellerLoading];
 }
