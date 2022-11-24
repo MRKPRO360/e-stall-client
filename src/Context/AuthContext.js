@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import {
+  createUserWithEmailAndPassword,
   getAuth,
   GoogleAuthProvider,
   onAuthStateChanged,
@@ -8,6 +9,7 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
+
 import app from "../Firebase/firebase.config";
 
 const auth = getAuth(app);
@@ -34,7 +36,8 @@ export default function AuthProvider({ children }) {
 
   const signup = async function (email, password, username) {
     setLoading(true);
-    const result = await (auth, email, password);
+    const result = await createUserWithEmailAndPassword(auth, email, password);
+
     await updateProfile(auth.currentUser, {
       displayName: username,
     });

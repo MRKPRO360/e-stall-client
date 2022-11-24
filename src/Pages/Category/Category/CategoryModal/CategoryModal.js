@@ -57,7 +57,18 @@ export default function CategoryModal({ categoryData, setCategoryData }) {
                 type="text"
                 name="phone"
                 className="w-full input input-bordered"
-                placeholder="Your Phone Number"
+                placeholder="+88 01*********"
+              />
+            </div>
+            <div className="w-full form-control">
+              <label className="mb-1 text-base font-semibold">
+                <span className="label-text">Meeting Location</span>
+              </label>
+              <input
+                type="text"
+                name="meeting"
+                className="w-full input input-bordered"
+                placeholder="Dhaka"
               />
             </div>
             <button className="w-full btn-primary-main">Confirm Book!</button>

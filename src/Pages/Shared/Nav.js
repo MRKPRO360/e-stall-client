@@ -2,7 +2,15 @@ import { Link, NavLink } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
 
 export default function Nav() {
-  const { currentuser } = useAuth();
+  const { currentuser, logout } = useAuth();
+
+  const handleLogout = async function () {
+    try {
+      await logout();
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   const navItems = [
     {
@@ -31,12 +39,12 @@ export default function Nav() {
       >
         Home
       </NavLink>
-      <li className="px-3 py-2 bg-white font-semibold">
+      <li className="px-3 py-2 font-semibold bg-white">
         Category
-        <ul className=" bg-gray-200 relative z-50">
+        <ul className="relative z-50 bg-gray-200 ">
           {navItems.map((el, i) => (
             <NavLink
-              className="px-4 py-2 hover:bg-gray-300 rounded "
+              className="px-4 py-2 rounded hover:bg-gray-300 "
               key={i}
               to={el.path}
             >
@@ -57,16 +65,25 @@ export default function Nav() {
           Login
         </NavLink>
       )}
+      {currentuser?.uid && (
+        <Link
+          onClick={handleLogout}
+          className="px-3 py-2 font-semibold text-black transition duration-300 rounded"
+          to="/login"
+        >
+          Logout
+        </Link>
+      )}
     </>
   );
   return (
-    <div className="navbar bg-base-100 justify-between">
+    <div className="justify-between navbar bg-base-100">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
+              className="w-5 h-5"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -81,17 +98,17 @@ export default function Nav() {
           </label>
           <ul
             tabIndex={0}
-            className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 gap-4"
+            className="gap-4 p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
           >
             {defaultNav}
           </ul>
         </div>
-        <Link to="/" className="btn btn-ghost normal-case">
+        <Link to="/" className="normal-case btn btn-ghost">
           <span className="text-xl">E-Stall</span>
         </Link>
       </div>
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal p-2 gap-6">{defaultNav}</ul>
+      <div className="hidden navbar-center lg:flex">
+        <ul className="gap-6 p-2 menu menu-horizontal">{defaultNav}</ul>
       </div>
     </div>
   );
