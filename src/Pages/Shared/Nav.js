@@ -66,13 +66,25 @@ export default function Nav() {
         </NavLink>
       )}
       {currentuser?.uid && (
-        <Link
-          onClick={handleLogout}
-          className="px-3 py-2 font-semibold text-black transition duration-300 rounded"
-          to="/login"
-        >
-          Logout
-        </Link>
+        <>
+          <Link
+            onClick={handleLogout}
+            className="px-3 py-2 font-semibold text-black transition duration-300 rounded"
+            to="/login"
+          >
+            Logout
+          </Link>
+          <NavLink
+            className={({ isActive }) =>
+              isActive
+                ? "text-white bg-green-400 px-3 py-2 transition duration-300 rounded font-semibold shadow-md shadow-green-300"
+                : "text-black px-3 py-2 transition duration-300 rounded font-semibold"
+            }
+            to="/dashboard"
+          >
+            Dashboard
+          </NavLink>
+        </>
       )}
     </>
   );
