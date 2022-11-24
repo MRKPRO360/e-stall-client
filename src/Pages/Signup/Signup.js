@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
+import SetAuthToken from "../../Utils/SetAuthToken";
+import SaveToDb from "../../Utils/SaveToDb";
 import toast from "react-hot-toast";
 
 export default function Login() {
-  const { signup, googleLogin } = useAuth();
+  const { signup, googleLogin, logout } = useAuth();
   const [signupError, setSignupError] = useState();
   const {
     register,
@@ -13,6 +15,9 @@ export default function Login() {
     formState: { errors },
   } = useForm();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
 
   const handleSignup = async function (data) {
     try {
@@ -27,19 +32,15 @@ export default function Login() {
         role,
       };
 
-      const config = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userInfo),
-      };
       if (user?.uid) {
-        const res = await fetch("http://localhost:5000/users", config);
-        const data = await res.json();
-        if (data.insertedId) {
+        const jwtData = await SetAuthToken(user, logout);
+
+        if (jwtData.token) {
+          await SaveToDb(userInfo);
           navigate("/");
-          toast.success(`Hey ${name}, your account created successfully!`);
+          toast.success(`Hey ${name}, your account created successfully!`, {
+            duration: 2500,
+          });
         }
       }
     } catch (err) {
@@ -47,6 +48,41 @@ export default function Login() {
       console.error(err);
     }
   };
+
+  // const handleGoogleLogin = async function () {
+  //   try {
+  //     const result = await googleLogin();
+
+  //     const user = result.user;
+
+  //     const userInfo = {
+  //       name: user?.displayName,
+  //       email: user?.email,
+  //       role: "buyer",
+  //     };
+
+  //     const config = {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(userInfo),
+  //     };
+  //     if (user?.uid) {
+  //       const res = await fetch("http://localhost:5000/users", config);
+  //       const data = await res.json();
+  //       if (data.insertedId) {
+  //         navigate("/");
+  //         toast.success(
+  //           `Hey ${user?.displayName}, your account created successfully!`,
+  //           { duration: 2500 }
+  //         );
+  //       }
+  //     }
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
 
   const handleGoogleLogin = async function () {
     try {
@@ -60,27 +96,29 @@ export default function Login() {
         role: "buyer",
       };
 
-      const config = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userInfo),
-      };
       if (user?.uid) {
-        const res = await fetch("http://localhost:5000/users", config);
-        const data = await res.json();
-        if (data.insertedId) {
-          navigate("/");
-          toast.success(
-            `Hey ${user?.displayName}, your account created successfully!`
-          );
+        const jwtData = await SetAuthToken(user, logout);
+
+        if (jwtData.token) {
+          const data = await SaveToDb(userInfo);
+
+          navigate(from, { replace: true });
+          !data.message
+            ? toast.success(
+                `Hey ${user?.displayName}, your account created successfully!`,
+                { duration: 2500 }
+              )
+            : toast.success(
+                `Hey ${user?.displayName}, you're successfully logged in :)`,
+                { duration: 2500 }
+              );
         }
       }
     } catch (err) {
       console.error(err);
     }
   };
+
   return (
     <div className="mx-auto w-96">
       <h1 className="mb-8 text-2xl font-semibold text-center text-black">

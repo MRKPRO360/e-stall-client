@@ -35,12 +35,12 @@ export default function CategoryCard({ category, setCategoryData }) {
         <div className="my-5 space-y-2 text-base font-semibold">
           <p>Manufacturer Name: {brand}</p>
           <p>Specification: {specification}</p>
-          <p>Original Price: {originalPrice}</p>
+          <p>Original Price: ${originalPrice}</p>
           <p>Buying Year: {yearsOfUse}</p>
-          <p>Posted Time: {new Date(postedDate).getDate()}</p>
+          <p>Posted Time: {new Date(postedDate).toDateString()}</p>
           <p>Seller Name: {sellerName}</p>
           <p>Location: {location}</p>
-          <p>Current Price: {price}</p>
+          <p>Current Price: ${price}</p>
         </div>
         <label
           onClick={() => setCategoryData(category)}

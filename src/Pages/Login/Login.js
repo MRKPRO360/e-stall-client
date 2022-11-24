@@ -1,12 +1,18 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
 import toast from "react-hot-toast";
+import SetAuthToken from "../../Utils/SetAuthToken";
+import SaveToDb from "../../Utils/SaveToDb";
 
 export default function Login() {
   const navigate = useNavigate();
-  const { login, googleLogin } = useAuth();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
+
+  const { login, googleLogin, logout } = useAuth();
   const [loginError, setLoginError] = useState("");
   const {
     register,
@@ -20,9 +26,17 @@ export default function Login() {
       const result = await login(email, password);
       const user = result.user;
 
-      toast.success(`Hey ${user?.displayName}, you're successfully logged in!`);
+      if (user?.uid) {
+        const jwtData = await SetAuthToken(user, logout);
 
-      console.log(user);
+        if (jwtData.token) {
+          navigate(from, { replace: true });
+          toast.success(
+            `Hey ${user?.displayName}, you're successfully logged in :)`,
+            { duration: 2500 }
+          );
+        }
+      }
     } catch (err) {
       setLoginError(err.message);
       console.error(err);
@@ -41,21 +55,22 @@ export default function Login() {
         role: "buyer",
       };
 
-      const config = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userInfo),
-      };
       if (user?.uid) {
-        const res = await fetch("http://localhost:5000/users", config);
-        const data = await res.json();
-        if (data.insertedId) {
-          navigate("/");
-          toast.success(
-            `Hey ${user?.displayName}, your account created successfully!`
-          );
+        const jwtData = await SetAuthToken(user, logout);
+
+        if (jwtData.token) {
+          const data = await SaveToDb(userInfo);
+
+          navigate(from, { replace: true });
+          !data.message
+            ? toast.success(
+                `Hey ${user?.displayName}, your account created successfully!`,
+                { duration: 2500 }
+              )
+            : toast.success(
+                `Hey ${user?.displayName}, you're successfully logged in :)`,
+                { duration: 2500 }
+              );
         }
       }
     } catch (err) {
