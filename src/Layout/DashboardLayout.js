@@ -2,7 +2,7 @@ import useAdmin from "../Hooks/useAdmin";
 import useBuyer from "../Hooks/useBuyer";
 import useSeller from "../Hooks/useSeller";
 import DashboardNav from "../Pages/Shared/DashboardNav";
-import { NavLink } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
 
 export default function DashboardLayout() {
@@ -13,37 +13,35 @@ export default function DashboardLayout() {
   const [isSeller] = useSeller(email);
   const [isAdmin] = useAdmin(email);
 
-  console.log(isBuyer, isSeller, isAdmin);
-
   const buyerNavItems = [
     {
-      path: "/myOrders",
+      path: "/dashboard/myOrders",
       text: "My Orders",
     },
     {
-      path: "/myWishlist",
+      path: "/dashboard/myWishlist",
       text: "My Wishlist",
     },
   ];
 
   const sellerNavItems = [
     {
-      path: "/addAproduct",
+      path: "/dashboard/addAproduct",
       text: "Add A Product",
     },
     {
-      path: "/myProducts",
+      path: "/dashboard/myProducts",
       text: "My Products",
     },
   ];
 
   const adminNavItems = [
     {
-      path: "/allSellers",
+      path: "/dashboard/allSellers",
       text: "All Sellers",
     },
     {
-      path: "/allBuyers",
+      path: "/dashboard/allBuyers",
       text: "All Buyers",
     },
   ];
@@ -70,7 +68,7 @@ export default function DashboardLayout() {
       <div className="drawer drawer-mobile">
         <input id="estore-drawer" type="checkbox" className="drawer-toggle" />
         <div className="flex flex-col items-center justify-center drawer-content">
-          {/* Page content here  */}
+          <Outlet />
         </div>
         <div className="drawer-side">
           <label htmlFor="estore-drawer" className="drawer-overlay"></label>

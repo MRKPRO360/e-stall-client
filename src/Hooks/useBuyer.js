@@ -17,7 +17,6 @@ export default function useBuyer(email) {
 
           if (data) {
             setIsBuyer(data.isBuyer);
-            console.log(data);
             setIsBuyerLoading(false);
           }
         } catch (err) {
