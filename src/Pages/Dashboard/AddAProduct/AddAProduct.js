@@ -1,3 +1,231 @@
+import { useForm } from "react-hook-form";
+import { useAuth } from "../../../Context/AuthContext";
+import { FaCloudUploadAlt } from "react-icons/fa";
 export default function AddAProduct() {
-  return <div>AddAProduct</div>;
+  const { currentuser } = useAuth();
+  const sellerEmail = currentuser?.email;
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const handleAddProduct = async function (data) {
+    const {
+      manufacturerName,
+      yearsOfPurchase,
+      productName,
+      conditionType,
+      price,
+      originalPrice,
+      meetingLocation,
+      upload,
+    } = data;
+
+    const image = upload[0];
+    const formData = new FormData();
+    formData.append("image", image);
+
+    const config = {
+      method: "POST",
+      body: formData,
+    };
+
+    // const imgBbRes = await fetch(
+    //   `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_imageHostKey}`,
+    //   config
+    // );
+
+    // const product = {
+    //   sellerEmail,
+    //   id: manufacturerName,
+    //   yearsOfUse: yearsOfPurchase,
+    //   name: productName,
+    //   verified: false,
+    //   conditionType: conditionType,
+    //   price: price,
+    //   originalPrice: originalPrice,
+    //   location: meetingLocation
+    //   ,img: ,
+
+    // };
+
+    // server config
+    // const config = {
+    //   mehthod: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     authorization: `Bearer ${localStorage.getItem("eStore-token")}`,
+    //   },
+    // };
+
+    try {
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  return (
+    <div className="mx-auto">
+      <h1 className="mb-8 text-2xl font-semibold text-center text-black">
+        Add A Product
+      </h1>
+      <form
+        className="sm:flex gap-8 mt-8 relative"
+        onSubmit={handleSubmit(handleAddProduct)}
+      >
+        <div className="w-full sm:w-1/2">
+          <div className="w-full form-control">
+            <label className="mb-1 text-base font-semibold">
+              <span className="label-text">Product Name</span>
+            </label>
+            <input
+              type="text"
+              className="w-full input input-bordered "
+              {...register("productName", { required: true })}
+            />
+            {errors.productName && (
+              <span className="text-red-500">Product Name is required</span>
+            )}
+          </div>
+          <div className="w-full form-control">
+            <label className="mb-1 text-base font-semibold">
+              <span className="label-text">Manufacturer Name</span>
+            </label>
+            <input
+              type="text"
+              className="w-full input input-bordered "
+              {...register("manufacturerName", { required: true })}
+            />
+            {errors.manufacturerName && (
+              <span className="text-red-500">
+                Manufacturer Name is required
+              </span>
+            )}
+          </div>
+          <div className="w-full form-control">
+            <label className="mb-1 text-base font-semibold">
+              <span className="label-text">Original Price</span>
+            </label>
+            <input
+              type="text"
+              className="w-full input input-bordered "
+              {...register("originalPrice", { required: true })}
+            />
+            {errors.originalPrice && (
+              <span className="text-red-500">Original price is required</span>
+            )}
+          </div>
+          <div className="w-full form-control">
+            <label className="mb-1 text-base font-semibold">
+              <span className="label-text">Condition Type</span>
+            </label>
+            <select
+              {...register("conditionType")}
+              className="w-full select select-bordered"
+            >
+              <option selected value="good">
+                Good
+              </option>
+              <option value="fair">Fair</option>
+              <option value="excellent">Excellent</option>
+            </select>
+          </div>
+          <div className="w-full form-control">
+            <label className="mb-1 text-base font-semibold">
+              <span className="label-text">Current Price</span>
+            </label>
+            <input
+              type="text"
+              className="w-full input input-bordered "
+              {...register("price", { required: true })}
+            />
+            {errors.price && (
+              <span className="text-red-500">Price is required</span>
+            )}
+          </div>
+        </div>
+
+        <div className="w-full h-[400px] sm:h-auto sm:flex-1 sm:space-y-1">
+          <div className="w-full form-control">
+            <label className="mb-1 text-base font-semibold">
+              <span className="label-text">Years of purchase</span>
+            </label>
+            <input
+              type="text"
+              className="w-full input input-bordered "
+              {...register("yearsOfPurchase", { required: true })}
+            />
+            {errors.yearsOfPurchase && (
+              <span className="text-red-500">
+                Years of purchase is required
+              </span>
+            )}
+          </div>
+          <div className="w-full form-control">
+            <label className="mb-1 text-base font-semibold">
+              <span className="label-text">Phone</span>
+            </label>
+            <input
+              type="text"
+              name="phone"
+              className="w-full input input-bordered"
+              {...register("phone", { required: true })}
+            />
+            {errors.phone && (
+              <span className="text-red-500">Phone is required</span>
+            )}
+          </div>
+          <div className="w-full form-control">
+            <label className="mb-1 text-base font-semibold">
+              <span className="label-text">Meeting Location</span>
+            </label>
+            <input
+              type="text"
+              name="meeting"
+              className="w-full input input-bordered"
+              placeholder="Dhaka"
+              {...register("meetingLocation", { required: true })}
+            />
+            {errors.meetingLocation && (
+              <span className="text-red-500">Meeting location is required</span>
+            )}
+          </div>
+          <div className="form-control w-full relative">
+            <label className="label cursor-pointer" htmlFor="uploadImage">
+              <span className="text-base font-semibold ">Upload Image</span>
+            </label>
+
+            <label htmlFor="uploadImage" className="absolute cursor-pointer">
+              <FaCloudUploadAlt
+                className=" text-green-500 text-3xl
+              absolute top-12 left-5 "
+              />
+              <span
+                className="absolute
+              block top-12 left-16 "
+              >
+                Upload
+              </span>
+            </label>
+
+            <input
+              type="file"
+              name="uploadImage"
+              id="uploadImage"
+              placeholder="Enter Title"
+              className="w-full max-w-lg input input-bordered invisible"
+              {...register("upload", { required: true })}
+            />
+            {errors?.upload && (
+              <p className="text-red-500">Image must be provided</p>
+            )}
+          </div>
+          <button type="submit" className="w-full btn-primary-main mb-10">
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  );
 }

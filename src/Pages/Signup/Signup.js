@@ -49,7 +49,6 @@ export default function Login() {
     }
   };
 
-  // const handleGoogleLogin = async function () {
   //   try {
   //     const result = await googleLogin();
 

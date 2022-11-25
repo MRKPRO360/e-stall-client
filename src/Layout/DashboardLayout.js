@@ -67,12 +67,12 @@ export default function DashboardLayout() {
       <DashboardNav />
       <div className="drawer drawer-mobile">
         <input id="estore-drawer" type="checkbox" className="drawer-toggle" />
-        <div className="flex flex-col items-center justify-center drawer-content">
+        <div className="flex drawer-content mt-5">
           <Outlet />
         </div>
         <div className="drawer-side">
           <label htmlFor="estore-drawer" className="drawer-overlay"></label>
-          <ul className="p-4 menu w-80 bg-base-100 text-base-content">
+          <ul className="py-4 space-y-3  menu w-80 bg-base-100 text-base-content">
             {isBuyer && createNav(buyerNavItems)}
             {isSeller && createNav(sellerNavItems)}
             {isAdmin && createNav(adminNavItems)}

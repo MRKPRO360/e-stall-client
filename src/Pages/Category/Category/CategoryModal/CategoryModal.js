@@ -1,4 +1,5 @@
 import React from "react";
+import toast from "react-hot-toast";
 import { useAuth } from "../../../../Context/AuthContext";
 
 export default function CategoryModal({ categoryData, setCategoryData }) {
@@ -6,10 +7,48 @@ export default function CategoryModal({ categoryData, setCategoryData }) {
   const { currentuser } = useAuth();
   const handleBookingSubmit = async function (e) {
     e.preventDefault();
+    const form = e.target;
+    const purchaserName = currentuser?.displayName;
+    const productId = categoryData._id;
+    const email = currentuser?.email;
+    const phone = form.phone.value;
+    const meetingLocation = form.meeting.value;
+    const price = categoryData.price;
+    const img = categoryData.img;
+
+    const book = {
+      purchaserName,
+      productId,
+      email,
+      phone,
+      meetingLocation,
+      price,
+      img,
+    };
+
+    const config = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("eStore-token")}`,
+      },
+      body: JSON.stringify(book),
+    };
 
     try {
-      setCategoryData({});
-    } catch (err) {}
+      const res = await fetch("http://localhost:5000/bookings", config);
+      const data = await res.json();
+
+      if (data.insertedId) {
+        setCategoryData({});
+        toast.success(
+          `Hey, ${currentuser?.displayName}, your booking confirmed`,
+          { duration: 2500 }
+        );
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
@@ -69,9 +108,12 @@ export default function CategoryModal({ categoryData, setCategoryData }) {
                 name="meeting"
                 className="w-full input input-bordered"
                 placeholder="Dhaka"
+                required
               />
             </div>
-            <button className="w-full btn-primary-main">Confirm Book!</button>
+            <button type="submit" className="w-full btn-primary-main">
+              Confirm Book!
+            </button>
           </form>
         </div>
       </div>
