@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useLoaderData, useNavigation } from "react-router-dom";
-import Spinner from "../../../Shared/Spinners";
+import Spinners from "../../../Shared/Spinners";
 import CategoryCard from "../CategoryCard/CategoryCard";
 import CategoryModal from "../CategoryModal/CategoryModal";
 
@@ -12,7 +12,7 @@ export default function Category() {
 
   return (
     <div>
-      {navigation.state === "loading" && <Spinner />}
+      {navigation.state === "loading" && <Spinners />}
       <div className="flex flex-wrap items-center justify-center gap-8">
         {categories?.map((category) => (
           <CategoryCard

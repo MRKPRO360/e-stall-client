@@ -180,7 +180,7 @@ export default function Login() {
             </label>
             <select
               {...register("role")}
-              className="w-full max-w-xs select select-bordered"
+              className="w-full select select-bordered"
             >
               <option selected value="buyer">
                 A buyer

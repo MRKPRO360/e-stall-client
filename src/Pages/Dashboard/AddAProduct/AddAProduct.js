@@ -54,6 +54,7 @@ export default function AddAProduct() {
           yearsOfUse: yearsOfPurchase,
           name: productName,
           verified: false,
+          sold: false,
           conditionType: conditionType,
           price: price,
           originalPrice: originalPrice,

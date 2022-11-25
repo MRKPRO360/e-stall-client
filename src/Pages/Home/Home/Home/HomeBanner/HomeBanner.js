@@ -4,7 +4,7 @@ export default function HomeBanner() {
   return (
     <div className="justify-between gap-10 p-5 space-y-10 bg-white rounded-md lg:flex lg:space-y-0">
       <div className="flex-1">
-        <h1 className="text-2xl font-semibold text-black sm:text-3xl md:text-4xl">
+        <h1 className="text-2xl font-semibold text-gray-700 sm:text-3xl md:text-4xl">
           Used Laptop in your reach
           <span className="font-bold text-green-500">...</span>
         </h1>

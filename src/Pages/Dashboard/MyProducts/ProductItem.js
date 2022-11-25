@@ -61,13 +61,13 @@ export default function ProductItem({ product, refetch }) {
             </button>
           ) : (
             <div className="ml-auto flex gap-1">
-              <button className="flex  items-center px-2 py-1 transition duration-200 transform rounded-md bg-green-500/60 active:translate-y-1 shadow-md shadow-green-200">
+              <button className="btn-sm btn-success">
                 <span className="text-base text-green-800">Available</span>
               </button>
               {!product?.advertised && (
                 <button
                   onClick={() => handleAdvertise(_id)}
-                  className="flex  items-center px-2 py-1 transition duration-200 transform rounded-md bg-yellow-500/60 active:translate-y-1 shadow-md shadow-yellow-200"
+                  className="btn-sm btn-process"
                 >
                   <span className="text-base text-yellow-900">Advertise</span>
                 </button>

@@ -8,11 +8,14 @@ export default function CategoryCard({ category, setCategoryData }) {
     originalPrice,
     postedDate,
     sellerName,
+    sellerEmail,
     specification,
     verified,
     yearsOfUse,
+    conditionType,
     id: brand,
   } = category;
+
   return (
     <div className="shadow-md shadow-green-200 card w-96 bg-base-100">
       <figure>
@@ -37,8 +40,10 @@ export default function CategoryCard({ category, setCategoryData }) {
           <p>Specification: {specification}</p>
           <p>Original Price: ${originalPrice}</p>
           <p>Buying Year: {yearsOfUse}</p>
+          <p>Condition: {conditionType}</p>
           <p>Posted Time: {new Date(postedDate).toDateString()}</p>
           <p>Seller Name: {sellerName}</p>
+          <p>Seller Email: {sellerEmail}</p>
           <p>Location: {location}</p>
           <p>Current Price: ${price}</p>
         </div>
