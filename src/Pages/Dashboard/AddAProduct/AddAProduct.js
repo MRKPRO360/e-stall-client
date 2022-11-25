@@ -50,7 +50,7 @@ export default function AddAProduct() {
         const product = {
           sellerEmail,
           sellerName,
-          id: manufacturerName,
+          id: manufacturerName.toLowerCase(),
           yearsOfUse: yearsOfPurchase,
           name: productName,
           verified: false,
