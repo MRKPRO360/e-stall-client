@@ -1,11 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import Spinners from "../../Shared/Spinners";
 
 export default function AllSellers() {
   const {
     data: sellers = [],
-    isLoading,
     isError,
     refetch,
   } = useQuery({
@@ -25,9 +23,8 @@ export default function AllSellers() {
     },
   });
 
-  const handleDeleteUser = async function (seller) {
+  const handleDeleteSeller = async function (seller) {
     try {
-      //
       const confirm = window.confirm(`Do you want to delete ${seller.name}`);
       const config = {
         method: "DELETE",
@@ -82,8 +79,8 @@ export default function AllSellers() {
 
   return (
     <div className="overflow-x-auto  w-full">
-      {isLoading && <Spinners />}
       {isError && "An unknown error has occured ): Try to reload the page."}
+      {!sellers?.length && "There is no seller buddy :("}
       <table className="table w-full">
         <thead>
           <tr>
@@ -114,7 +111,7 @@ export default function AllSellers() {
               </td>
               <td>
                 <button
-                  onClick={() => handleDeleteUser(seller)}
+                  onClick={() => handleDeleteSeller(seller)}
                   className="btn-red"
                 >
                   Delete
