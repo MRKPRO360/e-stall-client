@@ -115,6 +115,7 @@ export default function AddAProduct() {
               </label>
               <input
                 type="text"
+                placeholder="dell,hp, or lenovo only"
                 className="w-full input input-bordered "
                 {...register("manufacturerName", { required: true })}
               />

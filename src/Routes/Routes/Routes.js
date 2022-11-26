@@ -7,7 +7,6 @@ import Login from "../../Pages/Login/Login";
 import Signup from "../../Pages/Signup/Signup";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
-import MyWishList from "../../Pages/Dashboard/MyWishList/MyWishList";
 import AddAProduct from "../../Pages/Dashboard/AddAProduct/AddAProduct";
 import MyProducts from "../../Pages/Dashboard/MyProducts/MyProducts";
 import AllSellers from "../../Pages/Dashboard/AllSellers/AllSellers";
@@ -15,6 +14,7 @@ import AllBuyers from "../../Pages/Dashboard/AllBuyers/AllBuyers";
 import SellerRoute from "../SellerRoute/SellerRoute";
 import AdminRoute from "../AdminRoute/AdminRoute";
 import Payment from "../../Pages/Dashboard/MyOrders/Payment";
+import ReportedItem from "../../Pages/Dashboard/ReportedItem/ReportedItem";
 
 const router = createBrowserRouter([
   {
@@ -57,10 +57,7 @@ const router = createBrowserRouter([
         path: "/dashboard/myOrders",
         element: <MyOrders />,
       },
-      {
-        path: "/dashboard/myWishlist",
-        element: <MyWishList />,
-      },
+
       // Need to be wrapped with SellerRoute
       {
         path: "/dashboard/addAproduct",
@@ -92,6 +89,14 @@ const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <AllBuyers />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/reportedItem",
+        element: (
+          <AdminRoute>
+            <ReportedItem />
           </AdminRoute>
         ),
       },

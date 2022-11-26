@@ -1,4 +1,9 @@
 import { FaCheck } from "react-icons/fa";
+import useAdmin from "../../../../Hooks/useAdmin";
+import useSeller from "../../../../Hooks/useSeller";
+import { useAuth } from "../../../../Context/AuthContext";
+import toast from "react-hot-toast";
+
 export default function CategoryCard({ category, setCategoryData }) {
   const {
     img,
@@ -15,9 +20,42 @@ export default function CategoryCard({ category, setCategoryData }) {
     conditionType,
     id: brand,
   } = category;
+  const { currentuser } = useAuth();
+  const email = currentuser?.email;
+  const [isAdmin] = useAdmin(email);
+  const [isSeller] = useSeller(email);
+
+  const handleReportedProduct = async function (product) {
+    const reportedProduct = {
+      img: product.img,
+      title: product.name,
+      sellerEmail: product.sellerEmail,
+      price: product.price,
+      productId: product._id,
+    };
+    try {
+      const config = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${localStorage.getItem("eStore-token")}`,
+        },
+        body: JSON.stringify(reportedProduct),
+      };
+
+      const res = await fetch("http://localhost:5000/reportedProducts", config);
+      const data = await res.json();
+
+      if (data.insertedId) {
+        toast.success(`${product.name} reported`, { duration: 2500 });
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
-    <div className="shadow-md shadow-green-200 card w-96 bg-base-100">
+    <div className="shadow-md shadow-green-200 card w-96  bg-base-100">
       <figure>
         <img
           className="object-cover object-top w-full h-80"
@@ -29,15 +67,23 @@ export default function CategoryCard({ category, setCategoryData }) {
         <h2 className="card-title">
           {title}
           {verified && (
-            <div className="flex items-center gap-1 p-1 text-sm text-white bg-green-500 rounded-full">
+            <div className="flex items-center gap-1 p-1 text-sm text-white bg-blue-500 rounded-full">
               <FaCheck />
               <span>Verified</span>
             </div>
           )}
+          <div className={`${isAdmin && "hidden"} ${isSeller && "hidden"}`}>
+            <button
+              onClick={() => handleReportedProduct(category)}
+              className="btn-sm btn-red"
+            >
+              Report
+            </button>
+          </div>
         </h2>
         <div className="my-5 space-y-2 text-base font-semibold">
           <p>Manufacturer Name: {brand}</p>
-          <p>Specification: {specification}</p>
+          <p className="min-h-[50px]">Specification: {specification}</p>
           <p>Original Price: ${originalPrice}</p>
           <p>Buying Year: {yearsOfUse}</p>
           <p>Condition: {conditionType}</p>
@@ -47,13 +93,15 @@ export default function CategoryCard({ category, setCategoryData }) {
           <p>Location: {location}</p>
           <p>Current Price: ${price}</p>
         </div>
-        <label
-          onClick={() => setCategoryData(category)}
-          htmlFor="my-modal-3"
-          className="btn-primary-main"
-        >
-          Book Now!
-        </label>
+        <div className={`${isAdmin && "hidden"} ${isSeller && "hidden"}`}>
+          <label
+            onClick={() => setCategoryData(category)}
+            htmlFor="my-modal-3"
+            className="btn-primary-main"
+          >
+            Book Now!
+          </label>
+        </div>
       </div>
     </div>
   );

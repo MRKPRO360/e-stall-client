@@ -18,10 +18,6 @@ export default function DashboardLayout() {
       path: "/dashboard/myOrders",
       text: "My Orders",
     },
-    {
-      path: "/dashboard/myWishlist",
-      text: "My Wishlist",
-    },
   ];
 
   const sellerNavItems = [
@@ -43,6 +39,10 @@ export default function DashboardLayout() {
     {
       path: "/dashboard/allBuyers",
       text: "All Buyers",
+    },
+    {
+      path: "/dashboard/reportedItem",
+      text: "Reported Item",
     },
   ];
 

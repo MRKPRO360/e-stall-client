@@ -37,7 +37,7 @@ export default function Payment() {
       {isLoading && <Spinners />}
       {isError && "An unknown error has occured ): Try to reload the page."}
 
-      <h2 className="text-xl font-semibold">You are purchasing for ${name}</h2>
+      <h2 className="text-xl font-semibold">You are purchasing for {name}</h2>
       <div className="my-12 w-96">
         <Elements stripe={stripePromise}>
           <CheckoutForm booking={booking} />
