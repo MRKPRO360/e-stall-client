@@ -16,6 +16,7 @@ import AdminRoute from "../AdminRoute/AdminRoute";
 import Payment from "../../Pages/Dashboard/MyOrders/Payment";
 import ReportedItem from "../../Pages/Dashboard/ReportedItem/ReportedItem";
 import Error from "../../Pages/Shared/Error";
+import Blog from "../../Pages/Blog/Blog";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/blog",
+        element: <Blog />,
       },
       {
         path: "/category/:id",

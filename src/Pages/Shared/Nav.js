@@ -86,6 +86,16 @@ export default function Nav() {
           </NavLink>
         </>
       )}
+      <NavLink
+        className={({ isActive }) =>
+          isActive
+            ? "text-white bg-green-400 px-3 py-2 transition duration-300 rounded font-semibold shadow-md shadow-green-300"
+            : "text-black px-3 py-2 transition duration-300 rounded font-semibold"
+        }
+        to="/blog"
+      >
+        Blog
+      </NavLink>
     </>
   );
   return (
