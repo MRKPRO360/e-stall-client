@@ -72,7 +72,7 @@ export default function DashboardLayout() {
         </div>
         <div className="drawer-side">
           <label htmlFor="estore-drawer" className="drawer-overlay"></label>
-          <ul className="py-4 space-y-3 mx-3 menu w-80 bg-base-100 text-base-content">
+          <ul className="py-4 space-y-3 menu w-80 bg-base-100 text-base-content">
             {isBuyer && createNav(buyerNavItems)}
             {isSeller && createNav(sellerNavItems)}
             {isAdmin && createNav(adminNavItems)}

@@ -24,6 +24,7 @@ export default function CategoryModal({ categoryData, setCategoryData }) {
       meetingLocation,
       price,
       img,
+      name,
     };
 
     const config = {
