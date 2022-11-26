@@ -3,6 +3,7 @@ import useAdmin from "../../../../Hooks/useAdmin";
 import useSeller from "../../../../Hooks/useSeller";
 import { useAuth } from "../../../../Context/AuthContext";
 import toast from "react-hot-toast";
+import { useState } from "react";
 
 export default function CategoryCard({ category, setCategoryData }) {
   const {
@@ -25,7 +26,10 @@ export default function CategoryCard({ category, setCategoryData }) {
   const [isAdmin] = useAdmin(email);
   const [isSeller] = useSeller(email);
 
+  const [isHidden, setIsHidden] = useState(false);
+
   const handleReportedProduct = async function (product) {
+    setIsHidden(true);
     const reportedProduct = {
       img: product.img,
       title: product.name,
@@ -72,7 +76,11 @@ export default function CategoryCard({ category, setCategoryData }) {
               <span>Verified</span>
             </div>
           )}
-          <div className={`${isAdmin && "hidden"} ${isSeller && "hidden"}`}>
+          <div
+            className={`${isAdmin && "hidden"} ${isSeller && "hidden"} ${
+              isHidden && "hidden"
+            }`}
+          >
             <button
               onClick={() => handleReportedProduct(category)}
               className="btn-sm btn-red"

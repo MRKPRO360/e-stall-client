@@ -55,43 +55,48 @@ export default function ReportedItem() {
   return (
     <div className="overflow-x-auto  w-full">
       {isError && "An unknown error has occured ): Try to reload the page."}
-      {!products?.length && "There is no buyer buddy :("}
-      <table className="table w-full">
-        <thead>
-          <tr>
-            <th></th>
-            <th></th>
-            <th>Name</th>
-            <th>Seller Email</th>
-            <th>Price</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          {products?.map((product, i) => (
-            <tr key={product._id}>
-              <th>{i + 1}</th>
-              <td>
-                <div className="w-24 rounded-x">
-                  <img src={product.img} alt={product.title} />
-                </div>
-              </td>
-              <td>{product.title}</td>
-              <td>{product.sellerEmail}</td>
-              <td>{product.price}</td>
-
-              <td>
-                <button
-                  onClick={() => handleDeleteProduct(product)}
-                  className="btn-red"
-                >
-                  Delete
-                </button>
-              </td>
+      {!products?.length ? (
+        <h3 className="text-center font-semibold text-xl">
+          There is no reported product buddy :)
+        </h3>
+      ) : (
+        <table className="table w-full">
+          <thead>
+            <tr>
+              <th></th>
+              <th></th>
+              <th>Name</th>
+              <th>Seller Email</th>
+              <th>Price</th>
+              <th>Delete</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {products?.map((product, i) => (
+              <tr key={product._id}>
+                <th>{i + 1}</th>
+                <td>
+                  <div className="w-24 rounded-x">
+                    <img src={product.img} alt={product.title} />
+                  </div>
+                </td>
+                <td>{product.title}</td>
+                <td>{product.sellerEmail}</td>
+                <td>{product.price}</td>
+
+                <td>
+                  <button
+                    onClick={() => handleDeleteProduct(product)}
+                    className="btn-red"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 }

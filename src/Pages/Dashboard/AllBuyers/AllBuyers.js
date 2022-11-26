@@ -54,35 +54,40 @@ export default function AllBuyers() {
   return (
     <div className="overflow-x-auto  w-full">
       {isError && "An unknown error has occured ): Try to reload the page."}
-      {!buyers?.length && "There is no buyer buddy :("}
-      <table className="table w-full">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          {buyers?.map((buyer, i) => (
-            <tr key={buyer._id}>
-              <th>{i + 1}</th>
-              <td>{buyer.name}</td>
-              <td>{buyer.email}</td>
-
-              <td>
-                <button
-                  onClick={() => handleDeleteBuyer(buyer)}
-                  className="btn-red"
-                >
-                  Delete
-                </button>
-              </td>
+      {!buyers?.length ? (
+        <h3 className="text-center font-semibold text-xl">
+          There is no buyer buddy :(
+        </h3>
+      ) : (
+        <table className="table w-full">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Delete</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {buyers?.map((buyer, i) => (
+              <tr key={buyer._id}>
+                <th>{i + 1}</th>
+                <td>{buyer.name}</td>
+                <td>{buyer.email}</td>
+
+                <td>
+                  <button
+                    onClick={() => handleDeleteBuyer(buyer)}
+                    className="btn-red"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 }
