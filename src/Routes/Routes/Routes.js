@@ -15,6 +15,7 @@ import SellerRoute from "../SellerRoute/SellerRoute";
 import AdminRoute from "../AdminRoute/AdminRoute";
 import Payment from "../../Pages/Dashboard/MyOrders/Payment";
 import ReportedItem from "../../Pages/Dashboard/ReportedItem/ReportedItem";
+import Error from "../../Pages/Shared/Error";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,7 @@ const router = createBrowserRouter([
         element: <Signup />,
       },
     ],
+    errorElement: <Error />,
   },
   {
     path: "/dashboard",
@@ -105,6 +107,7 @@ const router = createBrowserRouter([
         element: <Payment />,
       },
     ],
+    errorElement: <Error />,
   },
 ]);
 
