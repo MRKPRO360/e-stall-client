@@ -1,7 +1,9 @@
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 export default function OrderItem({ order, refetch }) {
   const { img, name, price } = order;
+
   const handleDeleteBooking = async function (order) {
     try {
       const confirm = window.confirm(`Do you want to delete ${order.name}`);
@@ -34,7 +36,12 @@ export default function OrderItem({ order, refetch }) {
         <h2 className="card-title ">
           <span>{name}</span>{" "}
           {!order?.paid ? (
-            <button className="ml-auto btn-sm btn-process">Pay</button>
+            <Link
+              to={`/dashboard/payment/${order._id}`}
+              className="ml-auto btn-sm btn-process"
+            >
+              Pay
+            </Link>
           ) : (
             <button className="ml-auto btn-sm btn-success">
               <span className="text-base text-green-800">Paid</span>

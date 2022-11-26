@@ -62,7 +62,9 @@ export default function ProductItem({ product, refetch }) {
           ) : (
             <div className="ml-auto flex gap-1">
               <button className="btn-sm btn-success">
-                <span className="text-base text-green-800">Available</span>
+                <span className="text-base text-green-800">
+                  {product?.sold ? "sold" : "available"}
+                </span>
               </button>
               {!product?.advertised && (
                 <button
