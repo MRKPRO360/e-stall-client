@@ -62,7 +62,7 @@ export default function CategoryCard({ category, setCategoryData }) {
   };
 
   return (
-    <div className="shadow-md shadow-green-200 card w-96  bg-base-100">
+    <div className="shadow-md shadow-green-200 card w-96 bg-base-100">
       <figure>
         <img
           className="object-cover object-top w-full h-80"
@@ -96,7 +96,8 @@ export default function CategoryCard({ category, setCategoryData }) {
           <p>Manufacturer Name: {brand}</p>
           <p className="min-h-[50px]">Specification: {specification}</p>
           <p>Original Price: ${originalPrice}</p>
-          <p>Buying Year: {yearsOfUse}</p>
+          <p>Years of purchase: {category?.yearsOfPurchase || 2020}</p>
+          <p>Years of use: {yearsOfUse} </p>
           <p>Condition: {conditionType}</p>
           <p>Posted Time: {new Date(postedDate).toDateString()}</p>
           <p>Seller Name: {sellerName}</p>

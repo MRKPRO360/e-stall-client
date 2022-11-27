@@ -20,6 +20,7 @@ export default function AddAProduct() {
     const {
       manufacturerName,
       yearsOfPurchase,
+      yearsOfUse,
       productName,
       conditionType,
       price,
@@ -51,7 +52,8 @@ export default function AddAProduct() {
           sellerEmail,
           sellerName,
           id: manufacturerName.toLowerCase(),
-          yearsOfUse: yearsOfPurchase,
+          yearsOfPurchase,
+          yearsOfUse,
           name: productName,
           verified: false,
           sold: false,
@@ -97,7 +99,7 @@ export default function AddAProduct() {
         Add A Product
       </h1>
       <form className="mt-8" onSubmit={handleSubmit(handleAddProduct)}>
-        <div className="sm:flex gap-8">
+        <div className="gap-8 sm:flex">
           <div className="w-full sm:w-1/2">
             <div className="w-full form-control">
               <label className="mb-1 text-base font-semibold">
@@ -171,7 +173,7 @@ export default function AddAProduct() {
             </div>
           </div>
 
-          <div className="w-full  sm:flex-1 sm:space-y-1">
+          <div className="w-full sm:flex-1 sm:space-y-1">
             <div className="w-full form-control">
               <label className="mb-1 text-base font-semibold">
                 <span className="label-text">Current Price</span>
@@ -195,6 +197,21 @@ export default function AddAProduct() {
                 {...register("yearsOfPurchase", { required: true })}
               />
               {errors.yearsOfPurchase && (
+                <span className="text-red-500">
+                  Years of purchase is required
+                </span>
+              )}
+            </div>
+            <div className="w-full form-control">
+              <label className="mb-1 text-base font-semibold">
+                <span className="label-text">Years of use</span>
+              </label>
+              <input
+                type="text"
+                className="w-full input input-bordered "
+                {...register("yearsOfUse", { required: true })}
+              />
+              {errors.yearsOfUse && (
                 <span className="text-red-500">
                   Years of purchase is required
                 </span>
@@ -231,22 +248,14 @@ export default function AddAProduct() {
                 </span>
               )}
             </div>
-            <div className="form-control w-full relative">
-              <label className="label cursor-pointer" htmlFor="uploadImage">
+            <div className="relative w-full form-control">
+              <label className="cursor-pointer label" htmlFor="uploadImage">
                 <span className="text-base font-semibold ">Upload Image</span>
               </label>
 
               <label htmlFor="uploadImage" className="absolute cursor-pointer">
-                <FaCloudUploadAlt
-                  className=" text-green-500 text-3xl
-              absolute top-12 left-5 "
-                />
-                <span
-                  className="absolute
-              block top-12 left-16 "
-                >
-                  Upload
-                </span>
+                <FaCloudUploadAlt className="absolute text-3xl text-green-500 top-12 left-5" />
+                <span className="absolute block top-12 left-16 ">Upload</span>
               </label>
 
               <input
@@ -254,7 +263,7 @@ export default function AddAProduct() {
                 name="uploadImage"
                 id="uploadImage"
                 placeholder="Enter Title"
-                className="w-full max-w-lg input input-bordered invisible"
+                className="invisible w-full max-w-lg input input-bordered"
                 {...register("upload", { required: true })}
               />
               {errors?.upload && (
@@ -265,7 +274,7 @@ export default function AddAProduct() {
         </div>
 
         <div className="h-16">
-          <button type="submit" className="w-full btn-primary-main mb-10">
+          <button type="submit" className="w-full mb-10 btn-primary-main">
             Submit
           </button>
         </div>
