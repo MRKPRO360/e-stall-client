@@ -37,7 +37,10 @@ export default function CategoryModal({ categoryData, setCategoryData }) {
     };
 
     try {
-      const res = await fetch("http://localhost:5000/bookings", config);
+      const res = await fetch(
+        "https://e-stall-server-mrkpro360.vercel.app/bookings",
+        config
+      );
       const data = await res.json();
 
       if (data.insertedId) {

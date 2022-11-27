@@ -10,11 +10,14 @@ export default function AllBuyers() {
     queryKey: ["buyers"],
     queryFn: async function () {
       try {
-        const res = await fetch("http://localhost:5000/users/buyersForAdmin", {
-          headers: {
-            authorization: `Bearer ${localStorage.getItem("eStore-token")}`,
-          },
-        });
+        const res = await fetch(
+          "https://e-stall-server-mrkpro360.vercel.app/users/buyersForAdmin",
+          {
+            headers: {
+              authorization: `Bearer ${localStorage.getItem("eStore-token")}`,
+            },
+          }
+        );
         const data = await res.json();
         return data;
       } catch (err) {
@@ -34,7 +37,7 @@ export default function AllBuyers() {
       };
       if (confirm) {
         const res = await fetch(
-          `http://localhost:5000/users/buyersForAdmin/${buyer._id}`,
+          `https://e-stall-server-mrkpro360.vercel.app/users/buyersForAdmin/${buyer._id}`,
           config
         );
         const data = await res.json();

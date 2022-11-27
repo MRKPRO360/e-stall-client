@@ -10,11 +10,14 @@ export default function AllSellers() {
     queryKey: ["sellers"],
     queryFn: async function () {
       try {
-        const res = await fetch("http://localhost:5000/users/sellersForAdmin", {
-          headers: {
-            authorization: `Bearer ${localStorage.getItem("eStore-token")}`,
-          },
-        });
+        const res = await fetch(
+          "https://e-stall-server-mrkpro360.vercel.app/users/sellersForAdmin",
+          {
+            headers: {
+              authorization: `Bearer ${localStorage.getItem("eStore-token")}`,
+            },
+          }
+        );
         const data = await res.json();
         return data;
       } catch (err) {
@@ -34,7 +37,7 @@ export default function AllSellers() {
       };
       if (confirm) {
         const res = await fetch(
-          `http://localhost:5000/users/sellersForAdmin/${seller._id}`,
+          `https://e-stall-server-mrkpro360.vercel.app/users/sellersForAdmin/${seller._id}`,
           config
         );
         const data = await res.json();
@@ -61,7 +64,7 @@ export default function AllSellers() {
     };
     try {
       const res = await fetch(
-        `http://localhost:5000/users/sellersForAdmin/${seller._id}?email=${seller.email}`,
+        `https://e-stall-server-mrkpro360.vercel.app/users/sellersForAdmin/${seller._id}?email=${seller.email}`,
         config
       );
       const data = await res.json();

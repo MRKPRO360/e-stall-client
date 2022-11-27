@@ -18,11 +18,14 @@ export default function Payment() {
     queryKey: ["booking"],
     queryFn: async function () {
       try {
-        const res = await fetch(`http://localhost:5000/bookings/${id}`, {
-          headers: {
-            authorization: `Bearer ${localStorage.getItem("eStore-token")}`,
-          },
-        });
+        const res = await fetch(
+          `https://e-stall-server-mrkpro360.vercel.app/bookings/${id}`,
+          {
+            headers: {
+              authorization: `Bearer ${localStorage.getItem("eStore-token")}`,
+            },
+          }
+        );
 
         const data = await res.json();
         return data;

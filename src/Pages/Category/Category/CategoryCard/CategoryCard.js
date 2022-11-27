@@ -47,7 +47,10 @@ export default function CategoryCard({ category, setCategoryData }) {
         body: JSON.stringify(reportedProduct),
       };
 
-      const res = await fetch("http://localhost:5000/reportedProducts", config);
+      const res = await fetch(
+        "https://e-stall-server-mrkpro360.vercel.app/reportedProducts",
+        config
+      );
       const data = await res.json();
 
       if (data.insertedId) {

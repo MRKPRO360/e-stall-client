@@ -8,7 +8,10 @@ export default async function SaveToDb(userInfo) {
       body: JSON.stringify(userInfo),
     };
 
-    const res = await fetch("http://localhost:5000/users", config);
+    const res = await fetch(
+      "https://e-stall-server-mrkpro360.vercel.app/users",
+      config
+    );
     const data = await res.json();
     return data;
   } catch (err) {

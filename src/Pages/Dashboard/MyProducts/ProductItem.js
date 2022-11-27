@@ -11,7 +11,10 @@ export default function ProductItem({ product, refetch }) {
     };
     try {
       if (confirm) {
-        const res = await fetch(`http://localhost:5000/products/${id}`, config);
+        const res = await fetch(
+          `https://e-stall-server-mrkpro360.vercel.app/products/${id}`,
+          config
+        );
         const data = await res.json();
 
         if (data.deletedCount > 0) {
@@ -33,7 +36,10 @@ export default function ProductItem({ product, refetch }) {
       },
     };
     try {
-      const res = await fetch(`http://localhost:5000/products/${id}`, config);
+      const res = await fetch(
+        `https://e-stall-server-mrkpro360.vercel.app/products/${id}`,
+        config
+      );
       const data = await res.json();
 
       if (data.modifiedCount > 0) {

@@ -12,7 +12,10 @@ export default async function SetAuthToken(user, logout) {
       body: JSON.stringify(currentuser),
     };
 
-    const res = await fetch("http://localhost:5000/jwt", config);
+    const res = await fetch(
+      "https://e-stall-server-mrkpro360.vercel.app/jwt",
+      config
+    );
     const data = await res.json();
     localStorage.setItem("eStore-token", data.token);
 

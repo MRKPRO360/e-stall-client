@@ -8,12 +8,15 @@ export default function OrderItem({ order, refetch }) {
     try {
       const confirm = window.confirm(`Do you want to delete ${order.name}`);
       if (confirm) {
-        const res = await fetch(`http://localhost:5000/bookings/${order._id}`, {
-          method: "DELETE",
-          headers: {
-            authorization: `Bearer ${localStorage.getItem("eStore-token")}`,
-          },
-        });
+        const res = await fetch(
+          `https://e-stall-server-mrkpro360.vercel.app/bookings/${order._id}`,
+          {
+            method: "DELETE",
+            headers: {
+              authorization: `Bearer ${localStorage.getItem("eStore-token")}`,
+            },
+          }
+        );
         const data = await res.json();
         if (data.deletedCount > 0) {
           refetch();

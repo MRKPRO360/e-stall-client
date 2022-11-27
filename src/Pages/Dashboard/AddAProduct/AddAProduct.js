@@ -73,7 +73,10 @@ export default function AddAProduct() {
           body: JSON.stringify(product),
         };
 
-        const res = await fetch("http://localhost:5000/products", config);
+        const res = await fetch(
+          "https://e-stall-server-mrkpro360.vercel.app/products",
+          config
+        );
         const data = await res.json();
 
         if (data.acknowledged) {

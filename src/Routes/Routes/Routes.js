@@ -34,7 +34,9 @@ const router = createBrowserRouter([
       {
         path: "/category/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/categories/${params.id}`),
+          fetch(
+            `https://e-stall-server-mrkpro360.vercel.app/categories/${params.id}`
+          ),
         element: (
           <PrivateRoute>
             <Category />

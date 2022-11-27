@@ -10,11 +10,14 @@ export default function ReportedItem() {
     queryKey: ["products"],
     queryFn: async function () {
       try {
-        const res = await fetch("http://localhost:5000/reportedProducts", {
-          headers: {
-            authorization: `Bearer ${localStorage.getItem("eStore-token")}`,
-          },
-        });
+        const res = await fetch(
+          "https://e-stall-server-mrkpro360.vercel.app/reportedProducts",
+          {
+            headers: {
+              authorization: `Bearer ${localStorage.getItem("eStore-token")}`,
+            },
+          }
+        );
         const data = await res.json();
 
         return data;
@@ -36,7 +39,7 @@ export default function ReportedItem() {
       const confirm = window.confirm(`Do you want to delete ${product.title}`);
       if (confirm) {
         const res = await fetch(
-          `http://localhost:5000/reportedProducts/${product._id}?productId=${product.productId}`,
+          `https://e-stall-server-mrkpro360.vercel.app/reportedProducts/${product._id}?productId=${product.productId}`,
           config
         );
         const data = await res.json();

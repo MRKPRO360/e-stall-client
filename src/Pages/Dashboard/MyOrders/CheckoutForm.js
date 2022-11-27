@@ -14,7 +14,7 @@ export default function CheckoutForm({ booking }) {
   const elements = useElements();
 
   useEffect(() => {
-    fetch("http://localhost:5000/create-payment-intent", {
+    fetch("https://e-stall-server-mrkpro360.vercel.app/create-payment-intent", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -73,7 +73,7 @@ export default function CheckoutForm({ booking }) {
         productId,
       };
 
-      fetch("http://localhost:5000/payments", {
+      fetch("https://e-stall-server-mrkpro360.vercel.app/payments", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

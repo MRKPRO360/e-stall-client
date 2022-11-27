@@ -10,7 +10,7 @@ export default function useSeller(email) {
       const checkSeller = async function () {
         try {
           const res = await fetch(
-            `http://localhost:5000/users/seller?email=${email}`
+            `https://e-stall-server-mrkpro360.vercel.app/users/seller?email=${email}`
           );
 
           const data = await res.json();

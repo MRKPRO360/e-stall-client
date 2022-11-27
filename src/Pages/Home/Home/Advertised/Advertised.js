@@ -5,7 +5,7 @@ export default function Advertised() {
   const [advertised, setAdvertised] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:5000/advertisedProducts")
+      .get("https://e-stall-server-mrkpro360.vercel.app/advertisedProducts")
       .then(function (response) {
         setAdvertised(response.data);
       })
