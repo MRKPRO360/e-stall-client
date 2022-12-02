@@ -1,6 +1,8 @@
 # E-Stall Website
 
 ## Live Link: https://e-stall-7520f.web.app/
+## Admin Email: mdrezaulkarrim@gmail.com 
+## Admin Password: rezaul
 
 ### `Project Main Features are:`
 
