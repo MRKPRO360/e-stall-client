@@ -1,6 +1,9 @@
 # E-Stall Website
 
 ## Live Link: https://e-stall-7520f.web.app/
+## Server Side Code Link: https://github.com/MRKPRO360/e-stall-server
+## Admin Email: mdrezaulkarrim@gmail.com 
+## Admin Password: rezaul
 
 ### `Project Main Features are:`
 
