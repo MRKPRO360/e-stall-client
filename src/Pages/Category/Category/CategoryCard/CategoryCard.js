@@ -80,9 +80,9 @@ export default function CategoryCard({ category, setCategoryData }) {
             </div>
           )}
           <div
-            className={`${isAdmin && "hidden"} ${isSeller && "hidden"} ${
-              isHidden && "hidden"
-            }`}
+            className={`${isAdmin && "opacity-0"} ${isSeller && "opacity-0"} ${
+              isHidden && "opacity-0"
+            } `}
           >
             <button
               onClick={() => handleReportedProduct(category)}
@@ -105,6 +105,7 @@ export default function CategoryCard({ category, setCategoryData }) {
           <p>Location: {location}</p>
           <p>Current Price: ${price}</p>
         </div>
+
         <div className={`${isAdmin && "hidden"} ${isSeller && "hidden"}`}>
           <label
             onClick={() => setCategoryData(category)}

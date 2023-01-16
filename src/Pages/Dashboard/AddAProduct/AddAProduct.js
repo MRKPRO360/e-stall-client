@@ -1,5 +1,5 @@
-import { useForm } from "react-hook-form";
 import { useAuth } from "../../../Context/AuthContext";
+import { useForm } from "react-hook-form";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -164,7 +164,7 @@ export default function AddAProduct() {
                 {...register("conditionType")}
                 className="w-full select select-bordered"
               >
-                <option selected value="good">
+                <option defaultValue="good" value="good">
                   Good
                 </option>
                 <option value="fair">Fair</option>

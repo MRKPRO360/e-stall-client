@@ -1,8 +1,15 @@
 import { Link, NavLink } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
+import useAdmin from "../../Hooks/useAdmin";
+import useBuyer from "../../Hooks/useBuyer";
+import useSeller from "../../Hooks/useSeller";
 
 export default function Nav() {
   const { currentuser, logout } = useAuth();
+  const email = currentuser?.email;
+  const [isBuyer] = useBuyer(email);
+  const [isSeller] = useSeller(email);
+  const [isAdmin] = useAdmin(email);
 
   const handleLogout = async function () {
     try {
@@ -67,6 +74,44 @@ export default function Nav() {
       )}
       {currentuser?.uid && (
         <>
+          {isBuyer && (
+            <NavLink
+              className={({ isActive }) =>
+                isActive
+                  ? "text-white bg-green-400 px-3 py-2 transition duration-300 rounded font-semibold shadow-md shadow-green-300"
+                  : "text-black px-3 py-2 transition duration-300 rounded font-semibold"
+              }
+              to="/dashboard"
+            >
+              Dashboard
+            </NavLink>
+          )}
+          {isSeller && (
+            <NavLink
+              className={({ isActive }) =>
+                isActive
+                  ? "text-white bg-green-400 px-3 py-2 transition duration-300 rounded font-semibold shadow-md shadow-green-300"
+                  : "text-black px-3 py-2 transition duration-300 rounded font-semibold"
+              }
+              to="/sellerDashboard/"
+            >
+              Dashboard
+            </NavLink>
+          )}
+
+          {isAdmin && (
+            <NavLink
+              className={({ isActive }) =>
+                isActive
+                  ? "text-white bg-green-400 px-3 py-2 transition duration-300 rounded font-semibold shadow-md shadow-green-300"
+                  : "text-black px-3 py-2 transition duration-300 rounded font-semibold"
+              }
+              to="/adminDashboard/"
+            >
+              Dashboard
+            </NavLink>
+          )}
+
           <Link
             onClick={handleLogout}
             className="px-3 py-2 font-semibold text-black transition duration-300 rounded"
@@ -74,16 +119,6 @@ export default function Nav() {
           >
             Logout
           </Link>
-          <NavLink
-            className={({ isActive }) =>
-              isActive
-                ? "text-white bg-green-400 px-3 py-2 transition duration-300 rounded font-semibold shadow-md shadow-green-300"
-                : "text-black px-3 py-2 transition duration-300 rounded font-semibold"
-            }
-            to="/dashboard"
-          >
-            Dashboard
-          </NavLink>
         </>
       )}
       <NavLink

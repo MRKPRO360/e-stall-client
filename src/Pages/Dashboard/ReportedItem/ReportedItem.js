@@ -6,6 +6,7 @@ export default function ReportedItem() {
     data: products = [],
     isError,
     refetch,
+    isLoading,
   } = useQuery({
     queryKey: ["products"],
     queryFn: async function () {
@@ -58,7 +59,7 @@ export default function ReportedItem() {
   return (
     <div className="overflow-x-auto  w-full">
       {isError && "An unknown error has occured ): Try to reload the page."}
-      {!products?.length ? (
+      {!isLoading && products?.length === 0 ? (
         <h3 className="text-center font-semibold text-xl">
           There is no reported product buddy :)
         </h3>

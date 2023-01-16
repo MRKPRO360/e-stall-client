@@ -17,6 +17,8 @@ import Payment from "../../Pages/Dashboard/MyOrders/Payment";
 import ReportedItem from "../../Pages/Dashboard/ReportedItem/ReportedItem";
 import Error from "../../Pages/Shared/Error";
 import Blog from "../../Pages/Blog/Blog";
+import SellerLayout from "../../Layout/SellerLayout";
+import AdminLoayout from "../../Layout/AdminLayout";
 
 const router = createBrowserRouter([
   {
@@ -37,11 +39,7 @@ const router = createBrowserRouter([
           fetch(
             `https://e-stall-server-mrkpro360.vercel.app/categories/${params.id}`
           ),
-        element: (
-          <PrivateRoute>
-            <Category />
-          </PrivateRoute>
-        ),
+        element: <Category />,
       },
       {
         path: "/login",
@@ -63,51 +61,8 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "/dashboard/myOrders",
+        path: "/dashboard",
         element: <MyOrders />,
-      },
-
-      // Need to be wrapped with SellerRoute
-      {
-        path: "/dashboard/addAproduct",
-        element: (
-          <SellerRoute>
-            <AddAProduct />
-          </SellerRoute>
-        ),
-      },
-      {
-        path: "/dashboard/myProducts",
-        element: (
-          <SellerRoute>
-            <MyProducts />
-          </SellerRoute>
-        ),
-      },
-      // Need to be wrapped with AdminRoute
-      {
-        path: "/dashboard/allSellers",
-        element: (
-          <AdminRoute>
-            <AllSellers />
-          </AdminRoute>
-        ),
-      },
-      {
-        path: "/dashboard/allBuyers",
-        element: (
-          <AdminRoute>
-            <AllBuyers />
-          </AdminRoute>
-        ),
-      },
-      {
-        path: "/dashboard/reportedItem",
-        element: (
-          <AdminRoute>
-            <ReportedItem />
-          </AdminRoute>
-        ),
       },
       {
         path: "/dashboard/payment/:id",
@@ -115,6 +70,58 @@ const router = createBrowserRouter([
       },
     ],
     errorElement: <Error />,
+  },
+  {
+    path: "/sellerDashboard",
+    element: <SellerLayout />,
+    children: [
+      {
+        path: "/sellerDashboard/",
+        element: (
+          <SellerRoute>
+            <MyProducts />
+          </SellerRoute>
+        ),
+      },
+      {
+        path: "/sellerDashboard/addAproduct",
+        element: (
+          <SellerRoute>
+            <AddAProduct />
+          </SellerRoute>
+        ),
+      },
+    ],
+  },
+  {
+    path: "/adminDashboard",
+    element: <AdminLoayout />,
+    children: [
+      {
+        path: "/adminDashboard/",
+        element: (
+          <AdminRoute>
+            <AllSellers />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/adminDashboard/allBuyers",
+        element: (
+          <AdminRoute>
+            <AllBuyers />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/adminDashboard/reportedItem",
+        element: (
+          <AdminRoute>
+            <ReportedItem />
+          </AdminRoute>
+        ),
+      },
+    ],
   },
 ]);
 

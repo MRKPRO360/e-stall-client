@@ -1,48 +1,11 @@
-import useAdmin from "../Hooks/useAdmin";
-import useBuyer from "../Hooks/useBuyer";
-import useSeller from "../Hooks/useSeller";
 import DashboardNav from "../Pages/Shared/DashboardNav";
 import { NavLink, Outlet } from "react-router-dom";
-import { useAuth } from "../Context/AuthContext";
 
 export default function DashboardLayout() {
-  const { currentuser } = useAuth();
-  const email = currentuser?.email;
-
-  const [isBuyer] = useBuyer(email);
-  const [isSeller] = useSeller(email);
-  const [isAdmin] = useAdmin(email);
-
   const buyerNavItems = [
     {
-      path: "/dashboard/myOrders",
+      path: "/dashboard",
       text: "My Orders",
-    },
-  ];
-
-  const sellerNavItems = [
-    {
-      path: "/dashboard/addAproduct",
-      text: "Add A Product",
-    },
-    {
-      path: "/dashboard/myProducts",
-      text: "My Products",
-    },
-  ];
-
-  const adminNavItems = [
-    {
-      path: "/dashboard/allSellers",
-      text: "All Sellers",
-    },
-    {
-      path: "/dashboard/allBuyers",
-      text: "All Buyers",
-    },
-    {
-      path: "/dashboard/reportedItem",
-      text: "Reported Item",
     },
   ];
 
@@ -73,9 +36,7 @@ export default function DashboardLayout() {
         <div className="drawer-side">
           <label htmlFor="estore-drawer" className="drawer-overlay"></label>
           <ul className="py-4 space-y-3 menu w-80 bg-base-100 text-base-content">
-            {isBuyer && createNav(buyerNavItems)}
-            {isSeller && createNav(sellerNavItems)}
-            {isAdmin && createNav(adminNavItems)}
+            {createNav(buyerNavItems)}
           </ul>
         </div>
       </div>

@@ -6,6 +6,7 @@ export default function AllSellers() {
     data: sellers = [],
     isError,
     refetch,
+    isLoading,
   } = useQuery({
     queryKey: ["sellers"],
     queryFn: async function () {
@@ -83,7 +84,7 @@ export default function AllSellers() {
   return (
     <div className="overflow-x-auto  w-full">
       {isError && "An unknown error has occured ): Try to reload the page."}
-      {!sellers?.length ? (
+      {!isLoading && sellers?.length === 0 ? (
         <h3 className="text-center font-semibold text-xl">
           There is no seller buddy :(
         </h3>

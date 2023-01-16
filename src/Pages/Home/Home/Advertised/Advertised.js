@@ -1,8 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import AdvertisedItem from "./AdvertisedItem";
+import CategoryModal from "../../../Category/Category/CategoryModal/CategoryModal";
+
 export default function Advertised() {
   const [advertised, setAdvertised] = useState([]);
+  const [categoryData, setCategoryData] = useState({});
   useEffect(() => {
     axios
       .get("https://e-stall-server-mrkpro360.vercel.app/advertisedProducts")
@@ -21,8 +24,18 @@ export default function Advertised() {
       </h1>
       <div className="flex flex-wrap gap-6 p-5">
         {advertised?.map((el) => (
-          <AdvertisedItem key={el._id} product={el} />
+          <AdvertisedItem
+            key={el._id}
+            product={el}
+            setCategoryData={setCategoryData}
+          />
         ))}
+        {categoryData._id && (
+          <CategoryModal
+            categoryData={categoryData}
+            setCategoryData={setCategoryData}
+          />
+        )}
       </div>
     </div>
   );

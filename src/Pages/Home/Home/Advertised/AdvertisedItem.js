@@ -1,4 +1,8 @@
-export default function AdvertisedItem({ product }) {
+import { useAuth } from "../../../../Context/AuthContext";
+import useAdmin from "../../../../Hooks/useAdmin";
+import useSeller from "../../../../Hooks/useSeller";
+
+export default function AdvertisedItem({ product, setCategoryData }) {
   const {
     img,
     location,
@@ -11,6 +15,11 @@ export default function AdvertisedItem({ product }) {
     yearsOfUse,
     id: brand,
   } = product;
+  const { currentuser } = useAuth();
+  const email = currentuser?.email;
+  const [isAdmin] = useAdmin(email);
+  const [isSeller] = useSeller(email);
+
   return (
     <div className="shadow-md shadow-green-200 card w-96 bg-base-100">
       <figure>
@@ -31,6 +40,15 @@ export default function AdvertisedItem({ product }) {
           <p>Seller Name: {sellerName}</p>
           <p>Location: {location}</p>
           <p>Current Price: ${price}</p>
+        </div>
+        <div className={`${isAdmin && "hidden"} ${isSeller && "hidden"}`}>
+          <label
+            onClick={() => setCategoryData(product)}
+            htmlFor="my-modal-3"
+            className="btn-primary-main"
+          >
+            Book Now!
+          </label>
         </div>
       </div>
     </div>

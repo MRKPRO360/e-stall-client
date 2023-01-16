@@ -6,6 +6,7 @@ export default function AllBuyers() {
     data: buyers = [],
     isError,
     refetch,
+    isLoading,
   } = useQuery({
     queryKey: ["buyers"],
     queryFn: async function () {
@@ -57,7 +58,7 @@ export default function AllBuyers() {
   return (
     <div className="overflow-x-auto  w-full">
       {isError && "An unknown error has occured ): Try to reload the page."}
-      {!buyers?.length ? (
+      {!isLoading && buyers?.length === 0 ? (
         <h3 className="text-center font-semibold text-xl">
           There is no buyer buddy :(
         </h3>

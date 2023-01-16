@@ -3,9 +3,12 @@ import toast from "react-hot-toast";
 import { useAuth } from "../../../../Context/AuthContext";
 
 export default function CategoryModal({ categoryData, setCategoryData }) {
+  console.log("ok");
   const { name, price } = categoryData;
   const { currentuser } = useAuth();
   const handleBookingSubmit = async function (e) {
+    if (!currentuser?.uid)
+      return toast.error("Please login to book!", { duration: 2500 });
     e.preventDefault();
     const form = e.target;
     const purchaserName = currentuser?.displayName;

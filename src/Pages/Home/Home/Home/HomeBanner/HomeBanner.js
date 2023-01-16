@@ -1,8 +1,8 @@
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import img from "../../../../../image/banner.jpg";
 export default function HomeBanner() {
   return (
-    <div className="justify-between gap-10 p-5 space-y-10 bg-white rounded-md lg:flex lg:space-y-0">
+    <div className="justify-between gap-10 px-5 py-4 lg:py-7 space-y-10 bg-white rounded-md lg:flex lg:space-y-0 ">
       <div className="flex-1">
         <h1 className="text-2xl font-semibold text-gray-700 sm:text-3xl md:text-4xl">
           Used Laptop in your reach
@@ -14,7 +14,10 @@ export default function HomeBanner() {
           for the sake of our livelihood but for the sake of minds pleasure!
         </p>
         <div className="flex gap-6 mt-10 text-base font-semibold sm:text-lg lg:mt-20">
-          <button className="btn-primary-main">Buy Now</button>
+          <Link to="/category/hp" className="btn-primary-main">
+            Buy Now
+          </Link>
+
           <button className="btn-primary-outline btn-primary-outline-fat">
             Know More
           </button>

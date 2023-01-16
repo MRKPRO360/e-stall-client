@@ -6,7 +6,7 @@ export default function Main() {
   return (
     <div className="max-w-[1440px] mx-auto">
       <Nav />
-      <div className="my-16">
+      <div className="my-4 lg:my-16">
         <Outlet />
       </div>
       <Footer />

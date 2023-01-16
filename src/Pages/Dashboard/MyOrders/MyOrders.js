@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
+import Spinners from "../../Shared/Spinners";
 import OrderItem from "./OrderItem";
 
 export default function MyOrders() {
@@ -32,7 +33,8 @@ export default function MyOrders() {
       {!isLoading &&
         isError &&
         "An unknown error has occured ): Try to reload the page."}
-      {orders?.length < 1 && (
+      {isLoading && <Spinners />}
+      {!isLoading && orders?.length === 0 && (
         <span className="text-xl font-semibold">
           There is no booking to show yet. Please add some from{" "}
           <Link
@@ -59,7 +61,7 @@ export default function MyOrders() {
         </span>
       )}
 
-      <div className="flex flex-wrap justify-center gap-4">
+      <div className="flex flex-wrap justify-center gap-8 pb-10 ">
         {orders.length > 0 &&
           orders?.map((order) => (
             <OrderItem
