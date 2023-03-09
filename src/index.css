@@ -4,7 +4,7 @@
 
 @layer components {
   .btn-primary-main {
-    @apply flex items-center  justify-center px-2 py-1 text-white text-base font-semibold sm:text-lg duration-300 bg-green-500 rounded-md shadow-sm cursor-pointer sm:px-4 sm:py-2 hover:bg-green-600 active:bg-green-700 transform transition active:translate-y-1 focus:ring-2 focus:ring-offset-4 focus:ring-green-600 shadow-green-300 active:shadow-lg;
+    @apply flex items-center  justify-center px-2 py-1 text-white text-base font-semibold lg:text-lg duration-300 bg-green-500 rounded-md shadow-sm cursor-pointer sm:px-4  hover:bg-green-600 active:bg-green-700 transform transition active:translate-y-1 focus:ring-2 focus:ring-offset-4 focus:ring-green-600 active:shadow-lg;
   }
 
   .btn-red {
@@ -12,7 +12,7 @@
   }
 
   .btn-primary-outline {
-    @apply px-2 py-1 border-green-500 rounded-md sm:px-4 sm:py-2 transition duration-300 text-base font-semibold sm:text-lg hover:text-white hover:bg-green-500;
+    @apply px-2 py-1 border-green-500 rounded-md sm:px-4 sm:py-2 transition duration-300 text-base font-semibold lg:text-lg hover:text-white hover:bg-green-500;
   }
 
   .btn-primary-outline-fat {
