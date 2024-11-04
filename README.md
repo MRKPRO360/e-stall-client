@@ -1,6 +1,6 @@
 # Jerin's Parlour App
 
-## Live Link: https://jerin-parlour-d5cb3.web.app/
+## Live Link: https://e-stall-7520f.web.app/
 
 ## Server Side Code Link: https://github.com/MRKPRO360/e-stall-server
 
